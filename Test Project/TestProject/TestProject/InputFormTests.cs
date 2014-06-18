@@ -27,8 +27,8 @@ namespace TestProject
 
             doNavigationToEditForm();
             DoEditFormTest();
-            //DoEmptyFormTest();
-            // driver.Close();
+
+            driver.Close();
         }
 
         private void setupFirefoxDriver()

@@ -24,3 +24,16 @@ C:\Users\villacis\Dropbox\VT\Internship\InternshipSummer2014\Test Project\TestPr
 C:\Users\villacis\Dropbox\VT\Internship\InternshipSummer2014\Test Project\TestProject\TestProject\obj\Debug\TestProject.csprojResolveAssemblyReference.cache
 C:\Users\villacis\Dropbox\VT\Internship\InternshipSummer2014\Test Project\TestProject\TestProject\obj\Debug\TestProject.dll
 C:\Users\villacis\Dropbox\VT\Internship\InternshipSummer2014\Test Project\TestProject\TestProject\obj\Debug\TestProject.pdb
+C:\Users\villacis\Documents\GitHub\SummerInternship2014\Test Project\TestProject\TestProject\bin\Debug\TestProject.dll
+C:\Users\villacis\Documents\GitHub\SummerInternship2014\Test Project\TestProject\TestProject\bin\Debug\TestProject.pdb
+C:\Users\villacis\Documents\GitHub\SummerInternship2014\Test Project\TestProject\TestProject\bin\Debug\Selenium.WebDriverBackedSelenium.dll
+C:\Users\villacis\Documents\GitHub\SummerInternship2014\Test Project\TestProject\TestProject\bin\Debug\ThoughtWorks.Selenium.Core.dll
+C:\Users\villacis\Documents\GitHub\SummerInternship2014\Test Project\TestProject\TestProject\bin\Debug\WebDriver.dll
+C:\Users\villacis\Documents\GitHub\SummerInternship2014\Test Project\TestProject\TestProject\bin\Debug\WebDriver.Support.dll
+C:\Users\villacis\Documents\GitHub\SummerInternship2014\Test Project\TestProject\TestProject\bin\Debug\Selenium.WebDriverBackedSelenium.xml
+C:\Users\villacis\Documents\GitHub\SummerInternship2014\Test Project\TestProject\TestProject\bin\Debug\ThoughtWorks.Selenium.Core.xml
+C:\Users\villacis\Documents\GitHub\SummerInternship2014\Test Project\TestProject\TestProject\bin\Debug\WebDriver.xml
+C:\Users\villacis\Documents\GitHub\SummerInternship2014\Test Project\TestProject\TestProject\bin\Debug\WebDriver.Support.xml
+C:\Users\villacis\Documents\GitHub\SummerInternship2014\Test Project\TestProject\TestProject\obj\Debug\TestProject.csprojResolveAssemblyReference.cache
+C:\Users\villacis\Documents\GitHub\SummerInternship2014\Test Project\TestProject\TestProject\obj\Debug\TestProject.dll
+C:\Users\villacis\Documents\GitHub\SummerInternship2014\Test Project\TestProject\TestProject\obj\Debug\TestProject.pdb
