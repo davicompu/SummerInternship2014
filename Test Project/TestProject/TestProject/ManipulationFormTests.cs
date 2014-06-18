@@ -9,13 +9,13 @@ using System.Drawing.Imaging;
 namespace TestProject
 {
     [TestClass]
-    public class ManipulationFormTest
+    public class ManipulationFormTests
     {
         private IWebDriver driver;
         private IJavaScriptExecutor js_executor;
         private String url;
         [TestMethod]
-        public void ManipulationForm()
+        public void ManipulationFormTest()
         {
             url = url = "http://localhost:57404/#/";
             setupFirefoxDriver();

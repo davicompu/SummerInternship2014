@@ -16,7 +16,7 @@ namespace TestProject
         private String url;
 
         [TestMethod]
-        public void MainTest()
+        public void NavigationTest()
         {
             url = url = "http://localhost:57404/#/";
             DoFirefoxTest();
