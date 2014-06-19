@@ -71,7 +71,8 @@ namespace TestProject
             variance_b += number;
             BudgetAdjustment.SendKeys(number.ToString());
             body.Click();
-
+            //Make a pause to let the input to reformat
+            System.Threading.Thread.Sleep(TimeSpan.FromMilliseconds(600));
             IWebElement variance_a_client = driver.FindElement(By.XPath("/html/body/div/div/div[2]/div/section/section/div/div/section/fieldset[1]/div[7]/div/div/span/strong"));
             IWebElement variance_b_client = driver.FindElement(By.XPath("/html/body/div/div/div[2]/div/section/section/div/div/section/fieldset[2]/div[2]/div/div/span/strong"));
 

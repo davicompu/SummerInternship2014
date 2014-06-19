@@ -20,7 +20,7 @@ namespace TestProject
         {
             url = url = "http://localhost:57404/#/";
             setupFirefoxDriver();
-            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
 
             doNavigationToCreateForm();
             DoEmptyFormTest();

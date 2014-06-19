@@ -46,6 +46,7 @@ namespace TestProject
         private void DoAreaReportCheck(){
             data=getTable();
             checkCalculations();
+            checkExcelLink();
         }
 
         private ArrayList getTable()
@@ -104,25 +105,77 @@ namespace TestProject
         private void checkCalculations()
         {
             String active_section = "";
-            ArrayList members,subtotal;
-            int approved_budget, projected_expenditures, requested_budget, variance;
-            foreach (ArrayList section in data)
+            String other_section_title = "Other uses of funds";
+            ArrayList members, subtotal;
+            ArrayList total = new ArrayList();
+            int approved_budget, projected_expenditures, requested_budget, variance,i;
+            int[] internal_total = new int[4];
+
+            for ( i=0; i < internal_total.Length; i++)
             {
-                active_section = section[0].ToString();
-                members = (ArrayList)section[1];
-                approved_budget = getSumOfColumn(members, 3);
-                projected_expenditures = getSumOfColumn(members, 4);
-                requested_budget = getSumOfColumn(members, 5);
-                variance = getSumOfColumn(members, 6);
-                subtotal = (ArrayList)section[2];
-                subtotal = (ArrayList)subtotal[0];
-                Assert.AreEqual(approved_budget,getNumberFromText(subtotal[1].ToString()));
-                Assert.AreEqual(projected_expenditures, getNumberFromText(subtotal[2].ToString()));
-                Assert.AreEqual(requested_budget, getNumberFromText(subtotal[3].ToString()));
-                Assert.AreEqual(variance, getNumberFromText(subtotal[4].ToString()));
+                internal_total[i] = 0;
             }
+
+                foreach (ArrayList section in data)
+                {
+                    active_section = section[0].ToString();
+                    members = (ArrayList)section[1];
+                    approved_budget = getSumOfColumn(members, 3);
+                    projected_expenditures = getSumOfColumn(members, 4);
+                    requested_budget = getSumOfColumn(members, 5);
+                    variance = getSumOfColumn(members, 6);
+                    subtotal = (ArrayList)section[2];
+
+                    if (subtotal.Count > 1)
+                    {
+                        total = (ArrayList)subtotal[1];
+                        subtotal = (ArrayList)subtotal[0];
+                    }
+                    else
+                    {
+
+                        subtotal = (ArrayList)subtotal[0];
+                    }
+
+                    try {
+                        Assert.AreEqual(approved_budget, getNumberFromText(subtotal[1].ToString()));
+                        Assert.AreEqual(projected_expenditures, getNumberFromText(subtotal[2].ToString()));
+                        Assert.AreEqual(requested_budget, getNumberFromText(subtotal[3].ToString()));
+                        Assert.AreEqual(variance, getNumberFromText(subtotal[4].ToString()));
+                    }
+                    catch (Exception e)
+                    {
+                        takeScreenshot(String.Concat("ReportTest-",active_section));
+                        Assert.Fail(String.Concat("Report Test failed in section ", active_section));
+                    }
+                    
+
+                    if (active_section != other_section_title)
+                    {
+                        internal_total[0] += getNumberFromText(subtotal[1].ToString());
+                        internal_total[1] += getNumberFromText(subtotal[2].ToString());
+                        internal_total[2] += getNumberFromText(subtotal[3].ToString());
+                        internal_total[3] += getNumberFromText(subtotal[4].ToString());
+                    }
+                }
+
+                for ( i = 0; i < internal_total.Length; i++)
+                {
+                    try {
+                        Assert.AreEqual(internal_total[i], getNumberFromText(total[i + 1].ToString()));
+                    }
+                    catch (Exception e)
+                    {
+                        takeScreenshot("ReportTest-Total");
+                        Assert.Fail("Report Test failed, the total calculation is not ocrrect");
+                    }
+                    
+                }
+
+            
         }
 
+        
         private int getSumOfColumn(ArrayList rows, int column_index)
         {
             int total = 0;
@@ -162,6 +215,28 @@ namespace TestProject
             {
                 return 0;
             }
+        }
+
+        private void checkExcelLink()
+        {
+            try { 
+            Assert.AreEqual(true,driver.FindElement(By.PartialLinkText("Excel")).Displayed);
+            }
+            catch (Exception e)
+            {
+                takeScreenshot("ExcelLink");
+                Assert.Fail("There is none Excel report link");
+            }
+        }
+
+        private void takeScreenshot(String testName)
+        {
+            Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
+            string screenshot = ss.AsBase64EncodedString;
+            byte[] screenshotAsByteArray = ss.AsByteArray;
+            String date = String.Concat("__", DateTime.UtcNow.Month, "-", DateTime.UtcNow.Day, "-", DateTime.UtcNow.Year, "_", DateTime.UtcNow.Hour, "-", DateTime.UtcNow.Minute, "-", DateTime.UtcNow.Second, "__");
+            String filename = String.Concat(testName, "__screenshot", date, ".png");
+            ss.SaveAsFile(filename, ImageFormat.Png);
         }
     }
 }
