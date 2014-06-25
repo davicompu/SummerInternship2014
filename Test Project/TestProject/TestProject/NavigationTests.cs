@@ -31,8 +31,8 @@ namespace TestProject
             DoBasicNavigation();
             takeScreenshot("Chrome");
             driver.Close();
-            
-            /* Reaally slows down the test
+            /*
+            //Really slows down the test
             DoIETest();
             DoBasicNavigation();
             takeScreenshot("Internet_Explorer");
