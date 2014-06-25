@@ -32,10 +32,12 @@ namespace TestProject
             takeScreenshot("Chrome");
             driver.Close();
             
+            /* Reaally slows down the test
             DoIETest();
             DoBasicNavigation();
             takeScreenshot("Internet_Explorer");
             driver.Close();
+            */
         }
 
         private void doLoginCAS()

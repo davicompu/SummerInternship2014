@@ -220,7 +220,9 @@ namespace TestProject
         {
             int important_fields;
             int validation_messages;
-            driver.FindElement(By.Name("BudgetAdjustment")).SendKeys("1");
+            Random number = new Random(100000);
+            int random_number = number.Next();
+            driver.FindElement(By.Name("BudgetAdjustment")).SendKeys(random_number.ToString());
             button.Click();
             important_fields = getInputFields();
             validation_messages = getValidationMessages();
