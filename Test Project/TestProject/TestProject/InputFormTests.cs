@@ -18,7 +18,8 @@ namespace TestProject
         [TestMethod]
         public void InputFormTest()
         {
-            url = url = "http://localhost:57404/#/";
+            //url = "http://localhost:57404/#/";
+            url = "https://test-foundation.vpfin.vt.edu";
             setupFirefoxDriver();
             driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
 
@@ -31,11 +32,27 @@ namespace TestProject
             driver.Close();
         }
 
+        private void doLoginCAS()
+        {
+            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(2));
+            Credentials credentials = new Credentials();
+            IWebElement username_input = driver.FindElement(By.Id("username"));
+            IWebElement password_input = driver.FindElement(By.Id("password"));
+            IWebElement submit_button = driver.FindElement(By.Name("submit"));
+
+            username_input.SendKeys(credentials.getPID());
+            password_input.SendKeys(credentials.getPassword());
+            submit_button.Click();
+            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(2));
+        }
+
+
         private void setupFirefoxDriver()
         {
             driver = new FirefoxDriver();
             js_executor = (IJavaScriptExecutor)driver;
             driver.Navigate().GoToUrl(url);
+            doLoginCAS();
         }
 
 
@@ -51,9 +68,24 @@ namespace TestProject
 
         private void doNavigationToEditForm()
         {
-            String link_text = "Funds";
-            IWebElement link = driver.FindElement(By.LinkText(link_text));
-            link.Click();
+            IWebElement fundsLink = driver.FindElement(By.LinkText("Funds"));
+            
+            if (fundsLink.GetAttribute("href") != null)
+            {
+                fundsLink.Click();
+            }
+            else
+            {
+                //There is the need to click twice, something to look on
+                fundsLink.Click();
+                fundsLink.Click();
+                driver.FindElement(By.LinkText("Browse")).Click();
+            }
+
+
+            fundsLink.Click();
+         
+
             //Navigate to any fund
             IWebElement table = driver.FindElement(By.CssSelector("table.tabular"));
             ReadOnlyCollection<IWebElement> links = table.FindElements(By.TagName("a"));
@@ -74,7 +106,24 @@ namespace TestProject
             testDefaultForm(submit_button);
             testEmptyFormWithBudgetAjustment(submit_button);
             testClearedForm(submit_button);
+            testForFileInputElement();
 
+        }
+
+        private void testForFileInputElement()
+        {
+            IWebElement file = driver.FindElement(By.TagName("body"));
+            ReadOnlyCollection <IWebElement> inputs = driver.FindElements(By.TagName("input"));
+
+            foreach (IWebElement input in inputs)
+            {
+                if (input.GetAttribute("type") == "file")
+                {
+                    file = input;
+                }
+            }
+
+            Assert.IsTrue(file.Displayed);
         }
 
         private void DoEditFormTest()
