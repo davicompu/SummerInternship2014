@@ -38,7 +38,7 @@ namespace TestProject
         private void doLoginCAS()
         {
             System.Threading.Thread.Sleep(TimeSpan.FromSeconds(2));
-            Credentials credentials = new Credentials();
+            Credential credentials = new Credentials();
             IWebElement username_input = driver.FindElement(By.Id("username"));
             IWebElement password_input = driver.FindElement(By.Id("password"));
             IWebElement submit_button = driver.FindElement(By.Name("submit"));
